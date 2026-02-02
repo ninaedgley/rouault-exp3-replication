@@ -1,38 +1,47 @@
-# RouaultDayanFleming
-**Note:** This repository contains the original MATLAB code from Rouault et al. (2019). For Python replication of selected Experiment 3 analyses, see [PYTHON_REPLICATION.md](PYTHON_REPLICATION.md).
+# Rouault et al. (2019) Replication Analyses
+Python replication of Experiment 3 analyses from Rouault, Dayan, & Fleming (2019).
+Original MATLAB code: See [ORIGINAL_MATLAB_README.md](ORIGINAL_MATLAB_README.md)
 
-This repository contains analysis code for the following paper:
-Rouault M., Dayan P. & Fleming S. M. Forming global estimates of self-performance from local confidence. Nature Communications (2019)
+# Background
+First time working through a full computational cognitive modelling analysis. Python and statistics were familiar, but needed support for MATLAB code interpretation and HMeta-d' environment setup. Main challenge was data wrangling: identifying variables, and understanding nested MATLAB structures.
 
-Script and data files are included in the repository to enable replication of data analyses and rapid generation of the figures in the paper.
+## Reference
+Rouault, M., Dayan, P., & Fleming, S. M. (2019). Forming global estimates of self-performance from local confidence. *Nature Communications*, 10(1), 1141.
 
-The folder DATA contains anonymised behavioral data files for each of the three experiments of the paper, providing the summarised individual data for all plots and statistics: 
+## Completed Analyses
 
-•	Exp1.mat
+### 1. Confidence by Task Difficulty
+Confidence ratings track task difficulty: analysed per-subject mean confidence for Easy vs Difficult conditions (N=46) [manipulation check]
+- Script: `analyses/01_confidence_by_difficulty/exp3_confidence_subject_means.py`
+- Outputs: `outputs/01_confidence_distributions.png`, `outputs/01_confidence_easy_vs_different.png`
 
-•	Exp2.mat
+### 2. Task Choice Prediction
+Confidence difference predicts task choice beyond accuracy and RT (Pairing 6 analysis).
+- Script: `analyses/02_task_choice_regression/exp3_pair6_logrep.py`
+- Reference: Figure 5b analysis
 
-•	Exp3.mat
+### 3. Metacognitive Efficiency Correlation
+Metacognitive efficiency (M-ratio) correlates with global self-performance estimates (Spearman ρ = 0.340, p = 0.021).
+- Script: `analyses/03_metad_correlation/analyse_metad.py`
+- Reference: Figure 5d
+Note: Used pre-computed hierarchical Bayesian meta-d' from paper's data file. Did not re-implement MCMC estimation (requires MATLAB HMeta-d' toolbox), could not load properly (>2h).
 
-It also contains a file (perf_data_for_jasp.csv) allowing replication of Bayesian t-tests under JASP (https://jasp-stats.org/).
-The folder SCRIPTS contains three main scripts to enable replication of statistical analyses and rapid generation of the figures for each of the three experiments in the paper:
+## Structure
+```
+analyses/
+  01_confidence_by_difficulty/
+  02_task_choice_regression/
+  03_metad_correlation/
+data/
+  Exp3.mat
+outputs/
+  01_confidence_distributions.png
+  01_confidence_easy_vs_difficult.png
+utils/
+  load_exp3.py
+  inspect_x_ser6_all.py
+```
 
-•	BehaviorGroupExp1.m
+## Data Source
 
-•	BehaviorGroupExp2.m
-
-•	BehaviorGroupExp3.m
-
-The folder SCRIPTS also a script running the hierarchical learning model simulations (Group_simulations.m), and a number of helper scripts, for instance for ANOVA and regressions.
-
-To measure metacognition, we make use of previous work. Metacognitive efficiency can be measured by analysing the correspondence between accuracy and confidence, for instance using a signal detection theoretic metric, meta-d' (http://www.columbia.edu/~bsm2105/type2sdt/) (Maniscalco & Lau, 2012). Metacognitive efficiency can also be estimated hierarchically (https://github.com/metacoglab/HMeta-d) (Fleming, 2017).
-
-The folder SCRIPTS also contains a file generating the meta-d’ recovery for hierarchical vs. MLE fit (metacog_recovery.m).
-
-License.
-
-This code is being released with a permissive open-source license. You should feel free to use or adapt the utility code as long as you follow the terms of the license, which are enumerated below. If you make use of or build on the analyses, we would appreciate that you cite the paper.
-Copyright (c) 2018, Marion Rouault
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Original: https://github.com/marionrouault/RouaultDayanFleming
