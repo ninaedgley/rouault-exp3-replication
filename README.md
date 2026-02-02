@@ -1,4 +1,5 @@
 # RouaultDayanFleming
+**Note:** This repository contains the original MATLAB code from Rouault et al. (2019). For Python replication of selected Experiment 3 analyses, see [PYTHON_REPLICATION.md](PYTHON_REPLICATION.md).
 
 This repository contains analysis code for the following paper:
 Rouault M., Dayan P. & Fleming S. M. Forming global estimates of self-performance from local confidence. Nature Communications (2019)

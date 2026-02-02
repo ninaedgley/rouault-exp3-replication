@@ -1,0 +1,12 @@
+# macOS junk
+.DS_Store
+
+# Editor settings
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# MATLAB autosave
+*.asv
