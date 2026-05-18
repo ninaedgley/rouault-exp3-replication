@@ -347,7 +347,8 @@ That said, the original model remains the group-level winner. The BIC penalty fo
 
 ## Code
 
-All analyses are in Jupyter notebooks: [github.com/ninaedgley/rouault-exp3-replication](https://github.com/ninaedgley/rouault-exp3-replication).
+All analyses are in Jupyter notebooks: [github.com/ninaedgley/rouault-2019-extension](https://github.com/ninaedgley/rouault-2019-extension).
+
 - `01_load_data.ipynb` : preprocessing, MATLAB file extraction
 - `02_replication.ipynb` : statistical analyses and figure replications
 - `03_metad.ipynb` : meta-d' translation to Python, MLE and validation
