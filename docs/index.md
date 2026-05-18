@@ -131,7 +131,7 @@ All four models share the same perceptual module, but differ along 2 dimensions 
 
 ### Perceptual Module
 
-On each trial, the observer receives a noisy sensory signal where <script type="math/tex">d_t \in \{-1, +1\}</script> encodes the target side, <script type="math/tex">k_{ch}</script> is perceptual sensitivity (estimated per subject from overall accuracy), and <script type="math/tex">\Delta_t</script> is the stimulus strength (easy = 60, hard = 24). The observer responds left if <script type="math/tex">X_t < 0</script>, right otherwise:
+On each trial, the observer receives a noisy sensory signal where <script type="math/tex">d_t \in \{-1, +1\}</script> encodes the target side, <script type="math/tex">k_{ch}</script> is perceptual sensitivity (estimated per subject from overall accuracy), and <script type="math/tex">\Delta_t</script> is the stimulus strength (easy = 60, hard = 24). The observer responds left if <script type="math/tex">X_t \lt 0</script>, right otherwise:
 <script type="math/tex; mode=display">
 X_t \sim \mathcal{N}(d_t \cdot k_{ch} \cdot \Delta_t, \ 1)
 </script>
@@ -142,9 +142,9 @@ p(\text{correct}_t)
 =
 \begin{cases}
 \sigma\bigl(2 k_{conf} \Delta_t X_t\bigr)
-& \text{if } X_t > 0 \\
+\quad \text{if } X_t \gt 0 \\
 1 - \sigma\bigl(2 k_{conf} \Delta_t X_t\bigr)
-& \text{if } X_t \le 0
+\quad \text{if } X_t \le 0
 \end{cases}
 </script>
 
@@ -172,7 +172,7 @@ Each task <script type="math/tex">j \in \{1, 2\}</script> maintains a Beta poste
 \text{No-feedback trial:} \quad \text{unchanged}
 </script>
 
-When <script type="math/tex">\eta = 1</script>, this recovers the original binary rule (as confidence is weighted at 0, leaving the original binary update intact). When <script type="math/tex">\eta < 1</script>, even feedback trials incorporate the graded confidence signal. Feedback and confidence are treated as two cues to be integrated rather than as distinct update regimes on feedback v. no-feedback tasks. The total weight increment per trial remains 1 regardless of <script type="math/tex">\eta</script>, preserving the rate of evidence accumulation assumed in the original model.
+When <script type="math/tex">\eta = 1</script>, this recovers the original binary rule (as confidence is weighted at 0, leaving the original binary update intact). When <script type="math/tex">\eta \lt 1</script>, even feedback trials incorporate the graded confidence signal. Feedback and confidence are treated as two cues to be integrated rather than as distinct update regimes on feedback v. no-feedback tasks. The total weight increment per trial remains 1 regardless of <script type="math/tex">\eta</script>, preserving the rate of evidence accumulation assumed in the original model.
 
     
 ### Decision
@@ -181,7 +181,7 @@ At the end of each learning block, the observer chooses between tasks based on t
 
 **<script type="math/tex">\mathcal{M}_0</script> and <script type="math/tex">\mathcal{M}_\eta</script>** use the original Monte Carlo comparison (drawing samples from each Beta posterior and computing the probability that one exceeds the other):
 <script type="math/tex; mode=display">
-P(\text{choose } T_1) = P\bigl(\theta_1 > \theta_2\bigr), \quad \theta_j \sim \text{Beta}(\alpha_j, \beta_j)
+P(\text{choose } T_1) = P\bigl(\theta_1 \gt \theta_2\bigr), \quad \theta_j \sim \text{Beta}(\alpha_j, \beta_j)
 </script>
 
 **<script type="math/tex">\mathcal{M}_\lambda</script> and <script type="math/tex">\mathcal{M}_{\eta\lambda}</script>** replace this with a mean–variance utility approach, introducing uncertainty-aversion via <script type="math/tex">\lambda \geq 0</script>:
@@ -192,7 +192,7 @@ P(\text{choose } T_1) = P\bigl(\theta_1 > \theta_2\bigr), \quad \theta_j \sim \t
 U_j = \mu_j - \lambda \cdot \sigma_j
 </script>
 
-To compute the probability of task selection for these two models, I computed the approx. Beta posterior analytically (using mean and variance), rather than using the Monte Carlo sampling method. When <script type="math/tex">\lambda > 0</script>, the agent penalises tasks with uncertain posteriors — those with fewer observations or more ambiguous evidence. When <script type="math/tex">\lambda = 0</script>, the mean–variance formulation approximates the Monte Carlo comparison (both essentially reduce to comparing posterior means under the Gaussian approximation to the Beta). This directly captures the preference for feedback tasks at equal performance: feedback trials produce binary (0 or 1) increments, yielding higher effective weighted counts and tighter posteriors than the confidence-based increments on no-feedback trials.
+To compute the probability of task selection for these two models, I computed the approx. Beta posterior analytically (using mean and variance), rather than using the Monte Carlo sampling method. When <script type="math/tex">\lambda \gt 0</script>, the agent penalises tasks with uncertain posteriors — those with fewer observations or more ambiguous evidence. When <script type="math/tex">\lambda = 0</script>, the mean–variance formulation approximates the Monte Carlo comparison (both essentially reduce to comparing posterior means under the Gaussian approximation to the Beta). This directly captures the preference for feedback tasks at equal performance: feedback trials produce binary (0 or 1) increments, yielding higher effective weighted counts and tighter posteriors than the confidence-based increments on no-feedback trials.
 <script type="math/tex; mode=display">
 P(\text{choose } T_2) = \Phi\!\left(\frac{U_2 - U_1}{\sqrt{\sigma^2_1 + \sigma^2_2}}\right)
 </script>
@@ -323,11 +323,11 @@ Group-level mean absolute error confirms the same ordering: <script type="math/t
 *Figure 6: Observed task choice frequency comparison across models, relative to pairing and duration - stronger fit on feedback-driven task selection for the <script type="math/tex">\mathcal{M}_\lambda</script>.*
 
 The model fits show a strong positive skew in uncertainty aversion: most participants show none, with <script type="math/tex">\lambda = 0</script>, with a long positive tail for the remaining ~41%. My interpretation is that the <script type="math/tex">\mathcal{M}_\lambda</script> captures and better explains the behaviour of participants with positive <script type="math/tex">\lambda</script> values, hence the better individual performance. 
-For subjects with no uncertainty aversion (<script type="math/tex">\lambda \approx 0</script>), NLL improvements relative to <script type="math/tex">\mathcal{M}_0</script> likely reflect the deterministic Gaussian approximation being more stable than Monte Carlo sampling rather than a genuine effect of lambda. Subjects with <script type="math/tex">\lambda > 0</script> provide the cleaner evidence for the extended mechanism, with the largest NLL change values (6.0, 5.2, 3.5) concentrated in this group.
+For subjects with no uncertainty aversion (<script type="math/tex">\lambda \approx 0</script>), NLL improvements relative to <script type="math/tex">\mathcal{M}_0</script> likely reflect the deterministic Gaussian approximation being more stable than Monte Carlo sampling rather than a genuine effect of lambda. Subjects with <script type="math/tex">\lambda \gt 0</script> provide the cleaner evidence for the extended mechanism, with the largest NLL change values (6.0, 5.2, 3.5) concentrated in this group.
 
 The cue-integration model <script type="math/tex">\mathcal{M}_\eta</script> and combined model <script type="math/tex">\mathcal{M}_{\eta\lambda}</script> are decisively ruled out. Neither win for any subjects.
 - <script type="math/tex">\mathcal{M}_\eta</script> and its mean NLL (17.10) barely improves on the original (17.31), which isn't sufficient to justify the additional parameter. The fitted <script type="math/tex">\eta</script> distribution is bimodal, clustering at the bounds (<script type="math/tex">\eta \approx 0</script> or <script type="math/tex">\eta \approx 1</script>) with almost no subjects in between. From my understanding, this points to non-identifiability: the likelihood surface is essentially flat with respect to <script type="math/tex">\eta</script>, with the parameter not doing meaningful work.
-- <script type="math/tex">\mathcal{M}_{\eta\lambda}</script> almost always recovers the <script type="math/tex">\mathcal{M}_\lambda</script> fit exactly (<script type="math/tex">\eta</script> collapses to 1.0 whenever <script type="math/tex">\lambda > 0</script>), confirming that the two mechanisms do not interact. Adding <script type="math/tex">\eta</script> to a model that already has <script type="math/tex">\lambda</script> does not provide additional explanatory power.
+- <script type="math/tex">\mathcal{M}_{\eta\lambda}</script> almost always recovers the <script type="math/tex">\mathcal{M}_\lambda</script> fit exactly (<script type="math/tex">\eta</script> collapses to 1.0 whenever <script type="math/tex">\lambda \gt 0</script>), confirming that the two mechanisms do not interact. Adding <script type="math/tex">\eta</script> to a model that already has <script type="math/tex">\lambda</script> does not provide additional explanatory power.
    
 
 ## Conclusions
