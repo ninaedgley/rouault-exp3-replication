@@ -1,5 +1,9 @@
 title: "Forming global estimates of self-performance from local confidence - extension"
 description: "A Python replication + extension of Rouault, Dayan & Fleming (2019)"
 theme: minima
+markdown: kramdown
+
 kramdown:
-  math_engine: null
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
