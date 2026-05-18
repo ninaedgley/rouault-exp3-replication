@@ -1,6 +1,6 @@
 # Rouault et al. (2019) Extension
 Python replication and model extension of Rouault, Dayan, & Fleming (2019), *Forming global estimates of self-performance from local confidence*, Nature Communications.
-[Full write-up](https://ninaedgley.github.io/rouault-2019-extension/)
+[Full write-up]([https://ninaedgley.github.io/rouault-2019-extension/](https://ninaedgley.github.io/rouault-2019-extension/))
 
 
 ## Replication
